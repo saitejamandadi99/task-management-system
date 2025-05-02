@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
+    // Make “.” (project root) the base for imports
+    "baseUrl": ".",
+    // Map anything starting with “@/…” to “src/…”
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"]
     }
-  }
+  },
+  // Make sure JSON includes your source files
+  "include": ["next-env.d.ts", "**/*.js", "**/*.jsx", "src/**/*"]
 }
