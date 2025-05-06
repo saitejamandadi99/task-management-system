@@ -104,10 +104,33 @@ const getAllTasks = async (req, res) =>{
     }
 }
 
+//dashboard tasks adn contoller
+const getDashboardTasks = async (req , res) =>{
+    try {
+        const userId = req.user._id 
+        const createdTasks = await Task.find({createdBy:userId})
+        const assignedTasks = await Task.find({assignedTo:userId})
+        const date = new Date()
+        const overdueTasks = await Task.find({dueDate:{$lt:date}, status:'Pending', assignedTo:userId})
+        const completedTasks = await Task.find({status:'Completed', assignedTo:userId})
+
+        return res.status(200).json({
+            createdTasks,
+            assignedTasks,
+            overdueTasks,
+            completedTasks,
+        })
+    } catch (error) {
+        return res.status(500).json({message: error.message})
+    }
+
+}
+
 module.exports = {
     createTask,
     updateTask,
     deleteTask,
     getTask,
-    getAllTasks
+    getAllTasks,
+    getDashboardTasks,
 }
