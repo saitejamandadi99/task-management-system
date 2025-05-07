@@ -94,9 +94,33 @@ const getTask = async (req, res) =>{
 const getAllTasks = async (req, res) =>{
     try {
         const userId = req.user._id 
-        const tasks = await Task.find({$or:[{createdBy:userId}, {assignedTo:userId}]})
-        if (tasks.length === 0){
-            return res.status(404).json({message: 'No tasks found', tasks:[]})
+        const {search , status, priority, dueDate} = req.query
+        let query = {$or:[{createdBy:userId}, {assignedTo:userId}]}
+        if (search){
+            query.$or = [
+                {title: {$regex:search, $options:'i'}},
+                {description: {$regex: search, $options:'i'}}
+            ];
+        }
+        if(status){
+            query.status = status 
+        }
+        if(priority){
+            query.priority = priority
+        }
+        if(dueDate){
+            const dayStart = new Date(dueDate);
+            const dayEnd = new Date(dueDate);
+            dayStart.setHours(0,0,0,0);
+            dayEnd.setHours(23,59,59,999);
+            query.dueDate = {
+                $gte:dayStart,
+                $lte:dayEnd,
+            }
+        }
+        const tasks = await Task.find(query);
+        if (!tasks || tasks.length == 0){
+            return res.status(404).json({message: 'No tasks found'})
         }
         return res.status(200).json({tasks})
     } catch (error) {
@@ -125,6 +149,8 @@ const getDashboardTasks = async (req , res) =>{
     }
 
 }
+
+
 
 module.exports = {
     createTask,
