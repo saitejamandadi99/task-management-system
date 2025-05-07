@@ -1,0 +1,57 @@
+.registerWrapper {
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    animation: fadeIn 0.8s ease-in-out;
+    min-height: 100vh;
+  }
+  
+  .registerCard {
+    border-radius: 16px;
+    padding: 30px;
+    background-color: white;
+    animation: slideUp 0.5s ease-out;
+  }
+  
+  .title {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .inputField {
+    width: 100%;  /* Ensures the input takes up full width */
+    max-width: 400px; /* Limits the width of input fields */
+    margin: 0 auto;  /* Centers the input field */
+  }
+  
+  .formLabel {
+    font-weight: 600;
+    color: #333;
+    display: block;  /* Ensures label is on a new line above the input */
+    margin-bottom: 0.5rem; /* Adds space between the label and the input */
+  }
+  
+  .registerButton {
+    width: 100%; /* Makes the button fill the parent container's width */
+    max-width: 400px; /* Optional: fix max width for the button */
+    margin: 0 auto;  /* Centers the button */
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      transform: translateY(40px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
