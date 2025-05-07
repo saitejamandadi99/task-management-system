@@ -128,7 +128,7 @@ const getAllTasks = async (req, res) =>{
     }
 }
 
-//dashboard tasks adn contoller
+//dashboard tasks and contoller
 const getDashboardTasks = async (req , res) =>{
     try {
         const userId = req.user._id 

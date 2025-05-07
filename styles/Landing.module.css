@@ -1,0 +1,96 @@
+/* Full screen background and overlay */
+.wrapper {
+    height: 100vh;
+    background: linear-gradient(135deg, #007cf0, #00dfd8);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .overlay {
+    width: 100%;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .content {
+    text-align: center;
+    color: #fff;
+    max-width: 600px;
+  }
+  
+  /* Headline and subtext */
+  .title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Button container */
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  /* Shared button style */
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  /* Specific styles */
+  .primary {
+    background-color: #fff;
+    color: #0070f3;
+  }
+  
+  .secondary {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+  }
+  
+  /* Hover effects */
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  
+  /* Responsive layout */
+  @media (max-width: 768px) {
+    .title {
+      font-size: 2.2rem;
+    }
+  
+    .subtitle {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .buttons {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  
+    .btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  
