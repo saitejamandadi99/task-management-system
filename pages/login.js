@@ -14,20 +14,17 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/api/auth/login', {email, password});
-      const data = await response.json()
-      console.log('Response data:', data);
+      
+      console.log('Response data:', response.data);
       if(response.status === 200){
         const {message, user} = response.data;
         setSuccess(message);
         setError('');
         localStorage.setItem('token', user.token);
         localStorage.setItem('user', JSON.stringify(user));
-        setTimeout(() =>{
           router.push('/dashboard');
-        })
+        
       }
-
-
       
     } catch (error) {
       setError(error.response?.data?.message || 'Login Failed');

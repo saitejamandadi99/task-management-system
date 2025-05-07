@@ -35,11 +35,10 @@ const loginUser = async (req, res)=>{
         console.log('Login request body: ', req.body);
         const {email, password} = req.body;
     if (!email  || !password){
-        console.log('All fields are required');
         return res.status(400).json({message:'all fields are required'});
         
     }
-    console.log('Email and password: ', email, password);
+    
     const user =await User.findOne({email});
     console.log('User found: ', user);
     if(!user){
