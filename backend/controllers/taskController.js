@@ -1,8 +1,8 @@
 const Task = require('../models/Task')
 //create task 
-const createTask = async(req, res)=>{
+const createTask = async (req, res)=>{
     try{
-    const {title, description, dueDate, priority, status, createdBy, assignedTo} = req.body
+    const {title, description, dueDate, priority, status, assignedTo} = req.body
     if (!title || !dueDate){
         return res.status(400).json({message: 'Please add title, dueDate.'})
     }
@@ -91,64 +91,103 @@ const getTask = async (req, res) =>{
 }
 
 // get all tasks 
-const getAllTasks = async (req, res) =>{
+// File: controllers/taskController.js
+
+const getAllTasks = async (req, res) => {
     try {
-        const userId = req.user._id 
-        const {search , status, priority, dueDate} = req.query
-        let query = {$or:[{createdBy:userId}, {assignedTo:userId}]}
-        if (search){
-            query.$or = [
-                {title: {$regex:search, $options:'i'}},
-                {description: {$regex: search, $options:'i'}}
-            ];
-        }
-        if(status){
-            query.status = status 
-        }
-        if(priority){
-            query.priority = priority
-        }
-        if(dueDate){
-            const dayStart = new Date(dueDate);
-            const dayEnd = new Date(dueDate);
-            dayStart.setHours(0,0,0,0);
-            dayEnd.setHours(23,59,59,999);
-            query.dueDate = {
-                $gte:dayStart,
-                $lte:dayEnd,
-            }
-        }
-        const tasks = await Task.find(query);
-        if (!tasks || tasks.length == 0){
-            return res.status(404).json({message: 'No tasks found'})
-        }
-        return res.status(200).json({tasks})
+      const userId = req.user._id;
+  
+      const { search, status, priority, dueDate } = req.query;
+  
+      // Base query: only show tasks created by or assigned to current user
+      const query = {
+        $or: [
+          { createdBy: userId },
+          { assignedTo: userId }
+        ]
+      };
+  
+      // Apply search filter (title or description)
+      if (search) {
+        query.$and = [
+          {
+            $or: [
+              { title: { $regex: search, $options: 'i' } },
+              { description: { $regex: search, $options: 'i' } }
+            ]
+          }
+        ];
+      }
+  
+      // Apply status filter
+      if (status) {
+        query.status = status;
+      }
+  
+      // Apply priority filter
+      if (priority) {
+        query.priority = priority;
+      }
+  
+      // Apply dueDate filter (match on the selected day)
+      if (dueDate) {
+        const start = new Date(dueDate);
+        const end = new Date(dueDate);
+        start.setHours(0, 0, 0, 0);
+        end.setHours(23, 59, 59, 999);
+        query.dueDate = { $gte: start, $lte: end };
+      }
+  
+      const tasks = await Task.find(query).sort({ createdAt: -1 });
+  
+      res.status(200).json({ tasks });
     } catch (error) {
-        return res.status(500).json({message: error.message})
+      console.error(error);
+      res.status(500).json({ message: 'Server Error' });
     }
-}
+  };
+  
 
 //dashboard tasks and contoller
-const getDashboardTasks = async (req , res) =>{
+const getDashboardTasks = async (req, res) => {
     try {
-        const userId = req.user._id 
-        const createdTasks = await Task.find({createdBy:userId})
-        const assignedTasks = await Task.find({assignedTo:userId})
-        const date = new Date()
-        const overdueTasks = await Task.find({dueDate:{$lt:date}, status:'Pending', assignedTo:userId})
-        const completedTasks = await Task.find({status:'Completed', assignedTo:userId})
+        const userId = req.user._id;
 
+        // Fetching tasks based on different categories
+        const createdTasks = await Task.find({ createdBy: userId });
+        const assignedTasks = await Task.find({ assignedTo: userId });
+        const date = new Date();
+        const overdueTasks = await Task.find({ dueDate: { $lt: date }, status: 'Pending', assignedTo: userId });
+        const completedTasks = await Task.find({ status: 'Completed', assignedTo: userId });
+
+        // Return data for dashboard
         return res.status(200).json({
             createdTasks,
             assignedTasks,
             overdueTasks,
             completedTasks,
-        })
+        });
     } catch (error) {
-        return res.status(500).json({message: error.message})
+        return res.status(500).json({ message: error.message });
     }
+};
 
-}
+const getTaskHistory = async (req, res) => {
+    try {
+      const userId = req.user._id;
+  
+      const createdTasks = await Task.find({ createdBy: userId }).populate('assignedTo', 'name');
+      const assignedTasks = await Task.find({ assignedTo: userId }).populate('createdBy', 'name');
+  
+      res.status(200).json({
+        createdTasks,
+        assignedTasks,
+      });
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to fetch task history', error: error.message });
+    }
+  };
+  
 
 
 
@@ -159,4 +198,5 @@ module.exports = {
     getTask,
     getAllTasks,
     getDashboardTasks,
+    getTaskHistory,
 }

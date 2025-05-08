@@ -1,0 +1,127 @@
+.dashboardTasksContainer {
+    padding: 20px;
+}
+
+/* Card Styles */
+.taskCard, .overdueCard, .completedCard {
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.overdueCard {
+    border-color: #dc3545; /* Bootstrap danger color */
+    background-color: #ffcccc;
+}
+
+.completedCard {
+    border-color: #28a745; /* Bootstrap success color */
+    background-color: #d4edda;
+}
+
+/* Task List Styling */
+.taskList {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 10px;
+}
+
+.taskList li {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.taskList li:last-child {
+    border-bottom: none;
+}
+
+/* Task Item Styling */
+.taskItem {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.taskItem:hover {
+    text-decoration: underline;
+}
+
+/* Title Styling */
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Responsive Adjustments */
+
+/* For Small Devices (phones in portrait mode) */
+@media (max-width: 576px) {
+    .taskCard, .overdueCard, .completedCard {
+        margin-bottom: 15px;
+    }
+    .taskList li {
+        font-size: 0.8rem;
+    }
+    .dashboardTasksContainer {
+        padding: 15px;
+    }
+}
+
+/* For Medium Devices (tablets) */
+@media (min-width: 576px) and (max-width: 767px) {
+    .taskCard, .overdueCard, .completedCard {
+        margin-bottom: 20px;
+    }
+    .taskList li {
+        font-size: 0.85rem;
+    }
+    .dashboardTasksContainer {
+        padding: 20px;
+    }
+}
+
+/* For Large Devices (desktops) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .taskCard, .overdueCard, .completedCard {
+        margin-bottom: 25px;
+    }
+    .dashboardTasksContainer {
+        padding: 25px;
+    }
+}
+
+/* For Extra Large Devices (large desktops) */
+@media (min-width: 1200px) {
+    .dashboardTasksContainer {
+        padding: 30px;
+    }
+    .taskCard, .overdueCard, .completedCard {
+        margin-bottom: 30px;
+    }
+}
+
+/* Grid Layout Adjustments (for Bootstrap grid system) */
+
+/* For medium to large screens */
+@media (min-width: 768px) {
+    .taskCard, .overdueCard, .completedCard {
+        margin-bottom: 20px;
+    }
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .col-md-6, .col-lg-3 {
+        padding: 10px;
+    }
+}
+
+/* For large devices (larger desktops) */
+@media (min-width: 992px) {
+    .taskCard, .overdueCard, .completedCard {
+        margin-bottom: 30px;
+    }
+    .col-lg-3 {
+        margin-bottom: 30px;
+    }
+}

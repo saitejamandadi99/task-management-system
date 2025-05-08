@@ -1,0 +1,60 @@
+.card {
+    background-color: #ffffff;
+    padding: 1.25rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.08);
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s ease;
+    border: 1px solid #ddd;
+  }
+  
+  .card:hover {
+    transform: scale(1.02);
+  }
+  
+  .title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+    color: #0070f3;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+  }
+  
+  .readMore,
+  .editBtn,
+  .deleteBtn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    color: white;
+  }
+  
+  .readMore {
+    background-color: #0070f3;
+  }
+  
+  .editBtn {
+    background-color: #4caf50;
+  }
+  
+  .deleteBtn {
+    background-color: #e53935;
+  }
+  
+  .details {
+    margin-top: 1rem;
+    background-color: #f1f1f1;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #333;
+  }
+  

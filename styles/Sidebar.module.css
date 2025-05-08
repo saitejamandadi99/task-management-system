@@ -1,0 +1,54 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 240px;
+    background-color: #1e293b;
+    color: white;
+    padding: 1rem;
+    z-index: 1000;
+  }
+  
+  .menuToggle {
+    display: none;
+    margin-bottom: 1rem;
+    cursor: pointer;
+  }
+  
+  .nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  
+  .nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+  
+    .menuToggle {
+      display: block;
+    }
+  
+    .nav {
+      display: none;
+      flex-direction: column;
+    }
+  
+    .show {
+      display: flex;
+    }
+  }
+  

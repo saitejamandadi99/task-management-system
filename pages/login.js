@@ -21,7 +21,9 @@ const Login = () => {
         setSuccess(message);
         setError('');
         localStorage.setItem('token', user.token);
+        
         localStorage.setItem('user', JSON.stringify(user));
+        console.log('User data:', user)
           router.push('/dashboard');
         
       }
