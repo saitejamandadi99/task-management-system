@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import Navbar from '../components/Navbar'; // Assuming you have a Navbar component
 import styles from '../styles/History.module.css';
 import { useRouter } from 'next/router';
 
@@ -42,7 +42,7 @@ const TaskHistory = () => {
 
   return (
     <>
-      
+      <Navbar />
       <div className={styles.container}>
         <h2 className={styles.heading}>Task History</h2>
 

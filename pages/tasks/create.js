@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from '../../styles/CreateEditTask.module.css'; 
+import Navbar from '../../components/Navbar'; // Assuming you have a Navbar component
 
 const CreateTaskPage = () => {
   const [title, setTitle] = useState('');
@@ -73,6 +74,8 @@ const CreateTaskPage = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div className={styles.container}>
       <h2 className={styles.title}>Create Task</h2>
       
@@ -162,6 +165,7 @@ const CreateTaskPage = () => {
         <p className="text-center mt-3">Go back to <a href="/tasks">All Tasks</a></p>
       </div>
     </div>
+    </>
   );
 };
 

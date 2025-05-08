@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import styles from '../../../styles/EditTaskPage.module.css';
+import Navbar from '../../../components/Navbar'; // Assuming you have a Navbar component
 
 const EditTaskPage = () => {
   const router = useRouter();
@@ -86,6 +87,8 @@ const EditTaskPage = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div className={styles.container}>
       <h2 className={styles.heading}>Edit Task</h2>
       {error && <p className={styles.error}>{error}</p>}
@@ -161,6 +164,7 @@ const EditTaskPage = () => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 

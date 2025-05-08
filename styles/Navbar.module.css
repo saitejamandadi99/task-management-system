@@ -1,0 +1,79 @@
+/* File: styles/Navbar.module.css */
+
+.navbar {
+  background-color: #1e293b;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.menuButton {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.navLinks {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.navLinks a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.logoutButton {
+  background-color: #ef4444;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .menuButton {
+    display: block;
+  }
+
+  .navLinks {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    background-color: #1e293b;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 2rem;
+    transform: translateY(-200%);
+    transition: transform 0.3s ease-in-out;
+    gap: 1rem;
+  }
+
+  .navLinks.show {
+    transform: translateY(0);
+  }
+
+  .navLinks a,
+  .logoutButton {
+    width: 100%;
+  }
+}
